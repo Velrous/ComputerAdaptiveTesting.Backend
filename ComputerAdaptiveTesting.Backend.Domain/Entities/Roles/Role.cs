@@ -34,5 +34,12 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Roles
         [DataMember]
         [JsonProperty(PropertyName = "IsActive")]
         public bool IsActive { get; set; }
+        /// <summary>
+        /// Для отображения?
+        /// </summary>
+        [Display(Name = "Для отображения?")]
+        [DataMember]
+        [JsonProperty(PropertyName = "IsView")]
+        public bool IsView { get; set; }
     }
 }

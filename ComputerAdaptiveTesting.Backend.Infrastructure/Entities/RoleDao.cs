@@ -16,5 +16,9 @@ namespace ComputerAdaptiveTesting.Backend.Infrastructure.Entities
         /// Активна?
         /// </summary>
         public bool IsActive { get; set; }
+        /// <summary>
+        /// Для отображения?
+        /// </summary>
+        public bool IsView { get; set; }
     }
 }

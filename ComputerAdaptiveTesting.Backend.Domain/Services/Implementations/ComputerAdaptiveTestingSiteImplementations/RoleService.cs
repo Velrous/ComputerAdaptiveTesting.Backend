@@ -71,7 +71,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Services.Implementations.Comput
         /// <returns>Интерфейс для запроса брендов</returns>
         public IQueryable<Role> GetQueryable()
         {
-            var roleQueryable = _roleRepository.GetQueryable();
+            var roleQueryable = _roleRepository.GetQueryable().Where(x=>x.IsActive).Where(x=>x.IsView);
             return _mapper.ProjectTo<Role>(roleQueryable);
         }
     }
