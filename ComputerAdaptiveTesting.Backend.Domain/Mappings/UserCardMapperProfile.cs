@@ -3,19 +3,16 @@ using ComputerAdaptiveTesting.Backend.Infrastructure.Entities;
 
 namespace ComputerAdaptiveTesting.Backend.Domain.Mappings
 {
-    public class UserMapperProfile : AutoMapper.Profile
+    public class UserCardMapperProfile : AutoMapper.Profile
     {
-        public UserMapperProfile()
+        public UserCardMapperProfile()
         {
-            CreateMap<UserDao, User>()
+            CreateMap<UserDao, UserCard>()
                 .ForMember(p => p.Id, a => a.MapFrom(p => p.Id))
                 .ForMember(p => p.Login, a => a.MapFrom(p => p.Login))
-                .ForMember(p => p.PasswordHash, a => a.MapFrom(p => p.PasswordHash))
-                .ForMember(p => p.Salt, a => a.MapFrom(p => p.Salt))
                 .ForMember(p => p.Name, a => a.MapFrom(p => p.Name))
                 .ForMember(p => p.RoleId, a => a.MapFrom(p => p.RoleId))
-                .ForMember(p => p.IsActive, a => a.MapFrom(p => p.IsActive))
-                .ForMember(p=>p.Email, a=>a.MapFrom(p=>p.Email))
+                .ForMember(p => p.Email, a => a.MapFrom(p => p.Email))
                 ;
         }
     }

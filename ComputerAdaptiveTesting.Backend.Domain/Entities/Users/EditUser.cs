@@ -11,7 +11,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Users
     /// </summary>
     [DataContract]
     [Serializable]
-    public class User : IEntityWithId<int>
+    public class EditUser : IEntityWithId<int?>
     {
         /// <summary>
         /// Идентификатор
@@ -19,7 +19,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Users
         [Display(Name = "Id")]
         [DataMember]
         [JsonProperty(PropertyName = "Id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         /// <summary>
         /// Логин
         /// </summary>
@@ -28,19 +28,12 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Users
         [JsonProperty(PropertyName = "Login")]
         public string Login { get; set; }
         /// <summary>
-        /// Хэш пароля
+        /// Пароль
         /// </summary>
-        [Display(Name = "Хэш пароля")]
+        [Display(Name = "Пароль")]
         [DataMember]
-        [JsonProperty(PropertyName = "PasswordHash")]
-        public string PasswordHash { get; set; }
-        /// <summary>
-        /// Соль
-        /// </summary>
-        [Display(Name = "Соль")]
-        [DataMember]
-        [JsonProperty(PropertyName = "Salt")]
-        public string Salt { get; set; }
+        [JsonProperty(PropertyName = "Password")]
+        public string Password { get; set; }
         /// <summary>
         /// ФИО
         /// </summary>

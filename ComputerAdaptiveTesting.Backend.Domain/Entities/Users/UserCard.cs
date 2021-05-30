@@ -11,7 +11,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Users
     /// </summary>
     [DataContract]
     [Serializable]
-    public class User : IEntityWithId<int>
+    public class UserCard : IEntityWithId<int>
     {
         /// <summary>
         /// Идентификатор
@@ -28,20 +28,6 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Users
         [JsonProperty(PropertyName = "Login")]
         public string Login { get; set; }
         /// <summary>
-        /// Хэш пароля
-        /// </summary>
-        [Display(Name = "Хэш пароля")]
-        [DataMember]
-        [JsonProperty(PropertyName = "PasswordHash")]
-        public string PasswordHash { get; set; }
-        /// <summary>
-        /// Соль
-        /// </summary>
-        [Display(Name = "Соль")]
-        [DataMember]
-        [JsonProperty(PropertyName = "Salt")]
-        public string Salt { get; set; }
-        /// <summary>
         /// ФИО
         /// </summary>
         [Display(Name = "ФИО")]
@@ -55,13 +41,6 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Users
         [DataMember]
         [JsonProperty(PropertyName = "RoleId")]
         public int RoleId { get; set; }
-        /// <summary>
-        /// Активен?
-        /// </summary>
-        [Display(Name = "Активен?")]
-        [DataMember]
-        [JsonProperty(PropertyName = "IsActive")]
-        public bool IsActive { get; set; }
         /// <summary>
         /// Электронная почта
         /// </summary>

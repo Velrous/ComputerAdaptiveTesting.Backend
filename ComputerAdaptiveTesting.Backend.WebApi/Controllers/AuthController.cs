@@ -4,6 +4,7 @@ using ComputerAdaptiveTesting.Backend.Domain.Entities.Roles;
 using ComputerAdaptiveTesting.Backend.Domain.Entities.Users;
 using ComputerAdaptiveTesting.Backend.Domain.Ninject;
 using ComputerAdaptiveTesting.Backend.Domain.Services.Interfaces.ComputerAdaptiveTestingSiteInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Ninject;
@@ -25,6 +26,7 @@ namespace ComputerAdaptiveTesting.Backend.WebApi.Controllers
 
         #region Сервисы
 
+        private readonly IUserService _userService;
         private readonly IRoleService _roleService;
 
         #endregion
@@ -44,24 +46,43 @@ namespace ComputerAdaptiveTesting.Backend.WebApi.Controllers
 
             #region Получаем экземпляры требуемых репозиториев
 
+            _userService = kernel.Get<IUserService>();
             _roleService = kernel.Get<IRoleService>();
 
             #endregion
         }
 
-        [HttpGet]
+        [HttpPost, AllowAnonymous]
+        [Route("Login")]
+        public AuthInfo Login(LoginModel model)
+        {
+            return _userService.GetByLoginAndPassword(model.Login, model.Password);
+        }
+
+        [HttpPost, AllowAnonymous]
+        [Route("Register")]
+        public void Register(EditUser editUser)
+        { 
+            _userService.SaveUser(editUser);
+        }
+
+        [HttpGet, AllowAnonymous]
         [Route("Roles")]
         public IQueryable<Role> Get()
         {
             return _roleService.GetQueryable();
         }
 
-        [HttpPost]
-        [Route("Login")]
-        public User Post(AuthModel authModel)
+        [HttpPost, AllowAnonymous]
+        [Route("ValidateToken")]
+        public bool ValidateToken(TokenModel token)
         {
-            var result = 1;
-            return null;
+            var user = _userService.GetUserByToken(token.Token);
+            if (user != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Auth
     /// </summary>
     [DataContract]
     [Serializable]
-    public class AuthModel : IEntity
+    public class LoginModel : IEntity
     {
         /// <summary>
         /// Логин

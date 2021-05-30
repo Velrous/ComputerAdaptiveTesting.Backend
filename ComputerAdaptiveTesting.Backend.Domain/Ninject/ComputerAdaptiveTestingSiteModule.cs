@@ -72,6 +72,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Ninject
         public void AddServiceBindings()
         {
             Bind<IRoleService>().To<RoleService>();
+            Bind<IUserService>().To<UserService>();
             //Bind<IBrandService>().To<BrandService>();
         }
 

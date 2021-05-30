@@ -39,5 +39,10 @@ namespace ComputerAdaptiveTesting.Backend.Infrastructure.Entities
         /// Активен?
         /// </summary>
         public bool IsActive { get; set; }
+        /// <summary>
+        /// Электронный адрес
+        /// </summary>
+        [MaxLength(64)]
+        public string Email { get; set; }
     }
 }
