@@ -11,6 +11,11 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Services.Interfaces.ComputerAda
     public interface IUserService : IBaseService
     {
         /// <summary>
+        /// Создаёт пользователя
+        /// </summary>
+        /// <returns>Интерфейс для создания пользователя</returns>
+        void Create(EditUser editUser);
+        /// <summary>
         /// Создаёт или редактирует пользователя
         /// </summary>
         /// <returns>Интерфейс для создания или редактирования пользователя</returns>

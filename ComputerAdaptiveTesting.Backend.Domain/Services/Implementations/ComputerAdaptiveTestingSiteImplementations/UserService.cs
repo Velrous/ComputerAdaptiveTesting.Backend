@@ -72,6 +72,33 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Services.Implementations.Comput
         }
 
         /// <summary>
+        /// Создаёт пользователя
+        /// </summary>
+        /// <returns>Интерфейс для создания пользователя</returns>
+        public void Create(EditUser editUser)
+        {
+            if(editUser != null &&  !string.IsNullOrEmpty(editUser.Login))
+            {
+                if(!_userRepository.GetQueryable().Any(x=>x.Login == editUser.Login))
+                {
+                    var saltAndPassword = CreatePassword(editUser.Password);
+                    var newUser = new UserDao()
+                    {
+                        Login = editUser.Login,
+                        Name = editUser.Name,
+                        Email = editUser.Email,
+                        PasswordHash = saltAndPassword.passwordHash,
+                        Salt = saltAndPassword.salt,
+                        RoleId = editUser.RoleId,
+                        IsActive = editUser.IsActive
+                    };
+                    _userRepository.Create(newUser);
+                    _computerAdaptiveTestingSiteContext.SaveChanges();
+                }
+            }
+        }
+
+        /// <summary>
         /// Создаёт или редактирует пользователя
         /// </summary>
         /// <returns>Интерфейс для создания или редактирования пользователя</returns>

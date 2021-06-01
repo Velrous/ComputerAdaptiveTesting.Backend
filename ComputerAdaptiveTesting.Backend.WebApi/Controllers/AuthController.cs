@@ -63,7 +63,7 @@ namespace ComputerAdaptiveTesting.Backend.WebApi.Controllers
         [Route("Register")]
         public void Register(EditUser editUser)
         { 
-            _userService.SaveUser(editUser);
+            _userService.Create(editUser);
         }
 
         [HttpGet, AllowAnonymous]

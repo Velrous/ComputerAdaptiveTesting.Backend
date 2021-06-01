@@ -102,6 +102,7 @@ namespace ComputerAdaptiveTesting.Backend.Infrastructure.Contexts
             modelBuilder.Entity<UserGroupRelationDao>().ToTable("UserGroupRelations", "dbo");
             modelBuilder.Entity<UserDao>().ToTable("Users", "dbo");
             modelBuilder.Entity<UserTestDao>().ToTable("UserTests", "dbo");
+            modelBuilder.Entity<UserTokenDao>().ToTable("UserTokens", "dbo");
 
             #endregion
 
@@ -205,6 +206,13 @@ namespace ComputerAdaptiveTesting.Backend.Infrastructure.Contexts
             modelBuilder.Entity<UserTestDao>()
                 .Property(p => p.Id)
                 .ValueGeneratedOnAdd();
+
+            #endregion
+
+            #region UserTokenDao
+
+            modelBuilder.Entity<UserTokenDao>()
+                .HasKey(p => p.Token);
 
             #endregion
 
@@ -343,6 +351,15 @@ namespace ComputerAdaptiveTesting.Backend.Infrastructure.Contexts
                 .HasForeignKey(x => x.TestId);
 
             modelBuilder.Entity<UserTestDao>()
+                .HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId);
+
+            #endregion
+
+            #region UserTokenDao
+
+            modelBuilder.Entity<UserTokenDao>()
                 .HasOne(x => x.User)
                 .WithMany()
                 .HasForeignKey(x => x.UserId);
