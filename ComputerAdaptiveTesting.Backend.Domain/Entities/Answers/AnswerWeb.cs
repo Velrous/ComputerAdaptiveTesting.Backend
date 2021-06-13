@@ -14,6 +14,13 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Entities.Answers
     public class AnswerWeb : IEntity
     {
         /// <summary>
+        /// Идентификатор
+        /// </summary>
+        [Display(Name = "Id")]
+        [DataMember]
+        [JsonProperty(PropertyName = "Id")]
+        public long? Id { get; set; }
+        /// <summary>
         /// Наименование
         /// </summary>
         [Display(Name = "Наименование")]

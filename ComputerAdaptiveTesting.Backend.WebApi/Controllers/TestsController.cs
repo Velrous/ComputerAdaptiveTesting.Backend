@@ -1,4 +1,5 @@
-﻿using ComputerAdaptiveTesting.Backend.Domain.Entities.Tests;
+﻿using System.Collections.Generic;
+using ComputerAdaptiveTesting.Backend.Domain.Entities.Tests;
 using ComputerAdaptiveTesting.Backend.Domain.Ninject;
 using ComputerAdaptiveTesting.Backend.Domain.Services.Interfaces.ComputerAdaptiveTestingSiteInterfaces;
 using ComputerAdaptiveTesting.Backend.WebApi.Attributes;
@@ -52,7 +53,13 @@ namespace ComputerAdaptiveTesting.Backend.WebApi.Controllers
         [Route("Create")]
         public void Create(TestWeb newTest)
         {
-            var test = 1;
+            _testService.CreateTest(newTest);
+        }
+
+        [HttpGet]
+        public List<TestWeb> Get()
+        {
+            return _testService.GetListForWeb();
         }
     }
 }
