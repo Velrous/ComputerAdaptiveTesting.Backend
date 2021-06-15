@@ -16,6 +16,11 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Services.Interfaces.ComputerAda
         ///<param name="testWeb">Новый тест</param>
         void CreateTest(TestWeb testWeb);
         /// <summary>
+        /// Подводит результат прохождения теста
+        /// </summary>
+        ///<param name="test">Пройденный тест</param>
+        string PassTest(TestWeb test);
+        /// <summary>
         /// Возвращает интерфейс для запроса тестов
         /// </summary>
         /// <returns>Интерфейс для запроса тестов</returns>

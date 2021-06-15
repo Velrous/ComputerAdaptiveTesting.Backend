@@ -134,6 +134,52 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Services.Implementations.Comput
         }
 
         /// <summary>
+        /// Подводит результат прохождения теста
+        /// </summary>
+        ///<param name="test">Пройденный тест</param>
+        public string PassTest(TestWeb test)
+        {
+            if (test != null && test.Id.HasValue)
+            {
+                var correctAnswer = 0;
+                var testDao = _testRepository.GetById(test.Id.Value);
+                var questionList = _questionRepository.GetQueryable()
+                    .Where(x => x.TestId == testDao.Id)
+                    .ToList();
+                var answerList = _answerRepository.GetQueryable()
+                    .Where(x=>x.IsRight)
+                    .Where(x => questionList.Select(y => y.Id).Contains(x.QuestionId))
+                    .ToList();
+                if (test.Questions.Any())
+                {
+                    foreach (var questionWeb in test.Questions)
+                    {
+                        if (questionWeb.Answers.Any())
+                        {
+                            var userCorrectAnswer = questionWeb.Answers.FirstOrDefault(x => x.IsRight);
+                            if (userCorrectAnswer != null)
+                            {
+                                if (answerList.Any(x => x.Id == userCorrectAnswer.Id && x.Json == userCorrectAnswer.Name))
+                                {
+                                    correctAnswer++;
+                                }
+                            }
+                        }
+                    }
+                    if (test.Questions.Count == 1)
+                    {
+                        return $"Вы ответили верно на {correctAnswer} из {test.Questions.Count} вопроса.";
+                    }
+                    else
+                    {
+                        return $"Вы ответили верно на {correctAnswer} из {test.Questions.Count} вопросов.";
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Возвращает интерфейс для запроса тестов
         /// </summary>
         /// <returns>Интерфейс для запроса тестов</returns>
@@ -180,7 +226,7 @@ namespace ComputerAdaptiveTesting.Backend.Domain.Services.Implementations.Comput
                                     {
                                         Id = answer.Id,
                                         Name = answer.Json,
-                                        IsRight = answer.IsRight
+                                        IsRight = false
                                     };
                                     answerWebList.Add(answerWeb);
                                 }

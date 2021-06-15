@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ComputerAdaptiveTesting.Backend.Domain.Entities.Result;
 using ComputerAdaptiveTesting.Backend.Domain.Entities.Tests;
 using ComputerAdaptiveTesting.Backend.Domain.Ninject;
 using ComputerAdaptiveTesting.Backend.Domain.Services.Interfaces.ComputerAdaptiveTestingSiteInterfaces;
@@ -54,6 +55,18 @@ namespace ComputerAdaptiveTesting.Backend.WebApi.Controllers
         public void Create(TestWeb newTest)
         {
             _testService.CreateTest(newTest);
+        }
+
+        [HttpPost]
+        [Route("Pass")]
+        public BaseResult Pass(TestWeb test)
+        {
+            var text = _testService.PassTest(test);
+            var result = new BaseResult()
+            {
+                Text = text
+            };
+            return result;
         }
 
         [HttpGet]
